@@ -6,7 +6,7 @@ import useAuth from '../hooks/useAuth';
 
 const Login = () => {
   const [login, setlogin] = useState(false)
-  const {signIn,signUp,loading} =useAuth()
+  const {signIn,signUp} =useAuth()
 
   interface Inputs {
   email: string,
@@ -42,14 +42,6 @@ const Login = () => {
         height={150}
         alt='ff'
       />
-      {loading && (<div className="w-full h-full flex flex-col items-center justify-center">
-      <p className=" text-xl font-semibold text-textColor">
-       LOADING......
-      </p>
-      <div className="w-20 h-20 min-w-[40px] bg-red-600 animate-ping rounded-full flex items-center justify-center relative">
-        <div className=" absolute inset-0 rounded-full bg-red-600 blur-xl "></div>
-      </div>
-    </div>)}
       <form 
       onSubmit={handleSubmit(onSubmit)}
       className='relative mt-24 space-y-8 rounded bg-black/75 py-10 px-6 md:mt-0 md:max-w-md md:px-14'>
