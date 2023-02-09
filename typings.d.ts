@@ -2,6 +2,15 @@ export interface Genre {
     id: number
     name: string
   }
+
+  export interface Product {
+    id: number
+    name: string
+    price:number
+    video: string
+    resolution : string,
+    portability : string,
+  }
   
   export interface Movie {
     title: string
