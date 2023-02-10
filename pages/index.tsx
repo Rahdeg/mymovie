@@ -34,7 +34,7 @@ const Home = ({
 
     const {loading} =useAuth();
     const showModel=useRecoilValue(modalState);
-    const subscription = false
+    const subscription = false;
     if(loading || subscription === null) return null;
     if(!subscription) return <Plan products={products}/>
   

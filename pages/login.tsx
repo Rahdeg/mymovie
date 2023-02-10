@@ -2,11 +2,12 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { useState,useEffect } from 'react'
 import { useForm,SubmitHandler } from 'react-hook-form';
+import Loader from '../components/Loader';
 import useAuth from '../hooks/useAuth';
 
 const Login = () => {
-  const [login, setlogin] = useState(false)
-  const {signIn,signUp} =useAuth()
+  const [login, setlogin] = useState(false);
+  const {signIn,signUp,loading} =useAuth()
 
   interface Inputs {
   email: string,
@@ -75,13 +76,23 @@ const Login = () => {
        </div>
        <button 
        onClick={()=>setlogin(true)}
-       className='w-full rounded bg-[#e50914] py-3 font-semibold'>Sign in</button>
+       className='w-full rounded bg-[#e50914] py-3 font-semibold'>
+          {loading && login ? (
+              <Loader color="dark:fill-gray-300" />
+            ) : (
+              'Sign in'
+            )}
+       </button>
        <div className='text-[gray]'>
        New to Netflix? {' '}
         <button type='submit' 
         onClick={()=>setlogin(false)}
         className='text-white hover:underline'>
-          Sign up now
+         {loading && !login?  (
+              <Loader color="dark:fill-gray-300" />
+            ) : (
+              'Sign up now'
+            )}
         </button>
        </div>
       </form>

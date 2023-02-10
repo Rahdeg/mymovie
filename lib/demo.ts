@@ -24,3 +24,7 @@ export const products = [
         portability : "true",
     }
 ]
+
+export const loadCheckOut =(priceId:number | null |undefined)=>{
+    return priceId;
+}

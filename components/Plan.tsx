@@ -2,17 +2,26 @@ import Head from "next/head";
 import{useState} from 'react'
 import Link from "next/link";
 import useAuth from "../hooks/useAuth";
-import {BsPatchCheckFill} from 'react-icons/bs'
+import {BsCheck2} from 'react-icons/bs'
 import { Product } from "../typings";
 import Table from "./Table";
+import Loader from "./Loader";
+import { loadCheckOut } from "../lib/demo";
 
 interface Props {
     products : Product[];
 }
 
 const Plan = ({products}:Props) => {
-    const {logOut} =useAuth();
+    const {logOut,user} =useAuth();
     const [selectedPlan, setSelectedPlan] = useState<Product | null>(products[2])
+    const [isBillingLoading, setisBillingLoading] = useState(false);
+
+    const subscribeToPlan = ()=>{
+        if(!user) return;
+        loadCheckOut(selectedPlan?.price)
+        setisBillingLoading(true)   
+    }
 
   return (
     <div className="">
@@ -32,19 +41,19 @@ const Plan = ({products}:Props) => {
         </Link>
         <button className=" text-lg font-medium hover:underline" onClick={()=>logOut()}>SIgn out</button>
       </header>
-      <main className="pt-28 max-w-5xl pb-12 transition-all md:px-10">
+      <main className=" mx-auto pt-28 max-w-5xl pb-12 transition-all md:px-10">
         <h1 className="mb-3 text-3xl font-medium">Choose the plan that's right for you</h1>
         <ul>
         <li className="flex items-center gap-x-2 text-lg">
-            <BsPatchCheckFill className="h-7 w-7 text-[#E50914]" /> Watch all you want.
+            <BsCheck2 className="h-7 w-7 text-[#E50914]" /> Watch all you want.
             Ad-free.
           </li>
           <li className="flex items-center gap-x-2 text-lg">
-            <BsPatchCheckFill className="h-7 w-7 text-[#E50914]" /> Recommendations
+            <BsCheck2 className="h-7 w-7 text-[#E50914]" /> Recommendations
             just for you.
           </li>
           <li className="flex items-center gap-x-2 text-lg">
-            <BsPatchCheckFill className="h-7 w-7 text-[#E50914]" /> Change or cancel
+            <BsCheck2 className="h-7 w-7 text-[#E50914]" /> Change or cancel
             your plan anytime.
           </li>
         </ul>
@@ -60,7 +69,19 @@ const Plan = ({products}:Props) => {
             </div>
             {/* Table*/}
             <Table products={products} selectedPlan={selectedPlan}/> 
-            <button>Subscribe</button>
+            <button
+            disabled={!selectedPlan || isBillingLoading}
+            className={`mx-auto w-11/12 rounded bg-[#E50914] py-4 text-xl shadow hover:bg-[#f6121d] md:w-[420px] ${
+              isBillingLoading && 'opacity-60'
+            }`}
+            onClick={subscribeToPlan}
+          >
+            {isBillingLoading ? (
+              <Loader color="dark:fill-gray-300" />
+            ) : (
+              'Subscribe'
+            )}
+          </button>
         </div>
       </main>
 

@@ -21,6 +21,7 @@ interface IAuth {
   logOut: () => Promise<void>;
   error: string | null;
   loading: boolean;
+  sub : boolean,
 }
 const AuthContext = createContext<IAuth>({
   user: null,
@@ -29,11 +30,13 @@ const AuthContext = createContext<IAuth>({
   logOut: async () => {},
   error: null,
   loading: false,
+  sub : false,
 });
 export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [loading, setLoading] = useState(false);
   const [user, setUser] = useState<User | null>(null);
   const [error, setError] = useState(null);
+  const [sub, setSub] = useState(false);
   const [initialLoading, setInitialLoading] = useState(true)
   const router = useRouter();
 
@@ -98,6 +101,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       loading,
       logOut,
       error,
+      sub,
     }),
     [user, loading, error]
   );
