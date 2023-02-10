@@ -88,11 +88,7 @@ const Login = () => {
         <button type='submit' 
         onClick={()=>setlogin(false)}
         className='text-white hover:underline'>
-         {loading && !login?  (
-              <Loader color="dark:fill-gray-300" />
-            ) : (
-              'Sign up now'
-            )}
+         Sign up now
         </button>
        </div>
       </form>
