@@ -32,7 +32,7 @@ const Home = ({
   romanticMovies,
   documentries} : Props) => {
 
-    const {loading} =useAuth();
+    const {loading,} =useAuth();
     const showModel=useRecoilValue(modalState);
     const subscription = false;
     if(loading || subscription === null) return null;
