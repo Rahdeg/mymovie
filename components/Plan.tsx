@@ -10,17 +10,23 @@ import { loadCheckOut } from "../lib/demo";
 
 interface Props {
     products : Product[];
+    setSubs : React.Dispatch<React.SetStateAction<boolean>>;
+    subs : boolean
+    
 }
 
-const Plan = ({products}:Props) => {
-    const {logOut,user} =useAuth();
+const Plan = ({products,setSubs,subs }:Props) => {
+    const {logOut,user,subscribe} =useAuth();
     const [selectedPlan, setSelectedPlan] = useState<Product | null>(products[2])
     const [isBillingLoading, setisBillingLoading] = useState(false);
 
     const subscribeToPlan = ()=>{
         if(!user) return;
         loadCheckOut(selectedPlan?.price)
-        setisBillingLoading(true)   
+        setisBillingLoading(true)
+        setSubs(true);
+        console.log("subs",subs)
+     
     }
 
   return (

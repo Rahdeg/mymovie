@@ -26,5 +26,5 @@ export const products = [
 ]
 
 export const loadCheckOut =(priceId:number | null |undefined)=>{
-    return priceId;
+    console.log("plane",priceId);
 }

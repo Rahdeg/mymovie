@@ -17,6 +17,7 @@ const Login = () => {
   const { register, handleSubmit, formState: { errors } } = useForm<Inputs>();
   const onSubmit: SubmitHandler<Inputs> = async ({email,password}) => {
     if (login) {
+      
       await signIn(email,password);
     } else {
       await signUp(email,password);
@@ -75,9 +76,10 @@ const Login = () => {
         </label>
        </div>
        <button 
+      
        onClick={()=>setlogin(true)}
        className='w-full rounded bg-[#e50914] py-3 font-semibold'>
-          {loading && login ? (
+          {loading ? (
               <Loader color="dark:fill-gray-300" />
             ) : (
               'Sign in'
@@ -85,7 +87,8 @@ const Login = () => {
        </button>
        <div className='text-[gray]'>
        New to Netflix? {' '}
-        <button type='submit' 
+        <button 
+        type='submit' 
         onClick={()=>setlogin(false)}
         className='text-white hover:underline'>
          Sign up now

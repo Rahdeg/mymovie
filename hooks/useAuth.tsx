@@ -19,6 +19,7 @@ interface IAuth {
   signUp: (email: string, password: string) => Promise<void>;
   signIn: (email: string, password: string) => Promise<void>;
   logOut: () => Promise<void>;
+  subscribe:() => Promise<void>;
   error: string | null;
   loading: boolean;
   sub : boolean,
@@ -28,6 +29,7 @@ const AuthContext = createContext<IAuth>({
   signUp: async () => {},
   signIn: async () => {},
   logOut: async () => {},
+  subscribe: async () => {},
   error: null,
   loading: false,
   sub : false,
@@ -51,7 +53,6 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         } else {
           // Not logged in...
           setUser(null)
-          setLoading(true)
           router.push('/login')
         }
 
@@ -60,7 +61,12 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     [auth]
   )
 
+  const subscribe =async () =>{
+    setSub(true);
+  }
+
   const signUp = async (email: string, password: string) => {
+    if(!email || !password) return;
     setLoading(true);
     await createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
@@ -73,6 +79,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   };
 
   const signIn = async (email: string, password: string) => {
+    if(!email && !password) return;
     setLoading(true);
     await signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
@@ -102,8 +109,9 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       logOut,
       error,
       sub,
+      subscribe,
     }),
-    [user, loading, error]
+    [user, loading, error,]
   );
 
   return (
