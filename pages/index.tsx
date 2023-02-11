@@ -33,7 +33,7 @@ const Home = ({
   romanticMovies,
   documentries} : Props) => {
 
-    const {loading,sub} =useAuth();
+    const {loading} =useAuth();
     const [subs, setSubs] = useState(false);
     const showModel=useRecoilValue(modalState);
     const subscription = subs ? true : false;

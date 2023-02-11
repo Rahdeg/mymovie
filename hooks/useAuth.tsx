@@ -19,26 +19,21 @@ interface IAuth {
   signUp: (email: string, password: string) => Promise<void>;
   signIn: (email: string, password: string) => Promise<void>;
   logOut: () => Promise<void>;
-  subscribe:() => Promise<void>;
   error: string | null;
   loading: boolean;
-  sub : boolean,
 }
 const AuthContext = createContext<IAuth>({
   user: null,
   signUp: async () => {},
   signIn: async () => {},
   logOut: async () => {},
-  subscribe: async () => {},
   error: null,
   loading: false,
-  sub : false,
 });
 export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [loading, setLoading] = useState(false);
   const [user, setUser] = useState<User | null>(null);
   const [error, setError] = useState(null);
-  const [sub, setSub] = useState(false);
   const [initialLoading, setInitialLoading] = useState(true)
   const router = useRouter();
 
@@ -61,9 +56,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     [auth]
   )
 
-  const subscribe =async () =>{
-    setSub(true);
-  }
+  
 
   const signUp = async (email: string, password: string) => {
     if(!email || !password) return;
@@ -108,8 +101,6 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       loading,
       logOut,
       error,
-      sub,
-      subscribe,
     }),
     [user, loading, error,]
   );

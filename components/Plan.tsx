@@ -16,7 +16,7 @@ interface Props {
 }
 
 const Plan = ({products,setSubs,subs }:Props) => {
-    const {logOut,user,subscribe} =useAuth();
+    const {logOut,user} =useAuth();
     const [selectedPlan, setSelectedPlan] = useState<Product | null>(products[2])
     const [isBillingLoading, setisBillingLoading] = useState(false);
 
