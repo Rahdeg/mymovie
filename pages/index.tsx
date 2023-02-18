@@ -1,13 +1,15 @@
 import Head from 'next/head'
 import { useState } from 'react'
 import { useRecoilValue } from 'recoil'
-import { modalState } from '../atoms/modalAtom'
+import { modalState, movieState } from '../atoms/modalAtom'
 import Banner from '../components/Banner'
 import Header from '../components/Header'
 import Modal from '../components/Modal'
 import Plan from '../components/Plan'
 import Row from '../components/Row'
+import subscibtion from '../hooks/subscibtion'
 import useAuth from '../hooks/useAuth'
+import useList from '../hooks/useList'
 import { products } from '../lib/demo'
 import { Movie } from '../typings'
 import requests from '../utils/request'
@@ -23,7 +25,7 @@ interface Props {
   documentries:Movie[]
 }
 
-const Home = ({
+const Home =  ({
   netflixOriginals,
   trendingNow,
   topRated,
@@ -33,10 +35,12 @@ const Home = ({
   romanticMovies,
   documentries} : Props) => {
 
-    const {loading} =useAuth();
+    const {loading,user} =useAuth();
     const [subs, setSubs] = useState(false);
     const showModel=useRecoilValue(modalState);
-    const subscription = subs ? true : false;
+    const subscription =  subscibtion(user);
+    const list = useList(user?.uid);
+
     if(loading || subscription === null) return null;
     if(!subscription) return <Plan products={products} setSubs ={setSubs} subs={subs} />
   
@@ -57,7 +61,7 @@ const Home = ({
         <Row title='Top Rated' movies={topRated}/>
         <Row title='Action Thrillers' movies={actionMovies}/>
         {/*My List Component*/}
-        {/* {list.length > 0 && <Row title='My List' movies={list}/> } */}
+        {list.length > 0 && <Row title='My List' movies={list}/> }
         <Row title='Comedies' movies={comedyMovies}/>
         <Row title='Romantic Movies' movies={romanticMovies}/>
         <Row title='Scary Movies' movies={horrorMovies}/>

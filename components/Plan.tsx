@@ -7,6 +7,9 @@ import { Product } from "../typings";
 import Table from "./Table";
 import Loader from "./Loader";
 import { loadCheckOut } from "../lib/demo";
+import { doc,  setDoc } from "firebase/firestore";
+import { db } from "../firebase";
+import subscibtion from "../hooks/subscibtion";
 
 interface Props {
     products : Product[];
@@ -19,13 +22,15 @@ const Plan = ({products,setSubs,subs }:Props) => {
     const {logOut,user} =useAuth();
     const [selectedPlan, setSelectedPlan] = useState<Product | null>(products[2])
     const [isBillingLoading, setisBillingLoading] = useState(false);
+    const subscription =  subscibtion(user);
 
-    const subscribeToPlan = ()=>{
+    const subscribeToPlan =async ()=>{
         if(!user) return;
         loadCheckOut(selectedPlan?.price)
         setisBillingLoading(true)
-        setSubs(true);
-        console.log("subs",subs)
+        await setDoc(doc(db, 'plans', user!.uid, 'myPlan',user!.uid!),{selectedPlan});
+        setSubs(subscription);
+        
      
     }
 
