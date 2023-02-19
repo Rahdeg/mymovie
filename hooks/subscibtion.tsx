@@ -19,7 +19,6 @@ const subscibtion = (user: User | null) => {
     }, [user])
 
 
-    console.log("sub",subscribtion);
     
   return subscribtion
 }

@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import { useState } from 'react'
+import { useState,useEffect } from 'react'
 import { useRecoilValue } from 'recoil'
 import { modalState, movieState } from '../atoms/modalAtom'
 import Banner from '../components/Banner'
@@ -39,10 +39,10 @@ const Home =  ({
     const [subs, setSubs] = useState(false);
     const showModel=useRecoilValue(modalState);
     const subscription =  subscibtion(user);
-    const list = useList(user?.uid);
+    const list = useList(user?.uid);    
 
     if(loading || subscription === null) return null;
-    if(!subscription) return <Plan products={products} setSubs ={setSubs} subs={subs} />
+    if(!subscription) return (<Plan products={products} setSubs ={setSubs} subs={subs} />)
   
   return (
     <div className=" relative h-screen bg-gradient-to-b from-gray-900/10 to-[#010511] lg:h-[140vh]">
