@@ -15,7 +15,7 @@ Firestore integration to store movie data and user watchlists
 
 ## Installation
 
-Clone the repository: git clone https://github.com/your-username/movie-app.git
+Clone the repository: git clone https://github.com/Rahdeg/mymovie.git
 
 Install dependencies: npm install
 
