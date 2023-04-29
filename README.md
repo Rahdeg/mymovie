@@ -1,27 +1,43 @@
-# Next.js + Tailwind CSS Example
+# Movie App
+This is a web application built using Next.js, Tailwind CSS, and Firebase. The purpose of this application is to allow users to search for movies, view information about them, and watch trailers.
 
-This example shows how to use [Tailwind CSS](https://tailwindcss.com/) [(v3.2)](https://tailwindcss.com/blog/tailwindcss-v3-2) with Next.js. It follows the steps outlined in the official [Tailwind docs](https://tailwindcss.com/docs/guides/nextjs).
+## Features
 
-## Deploy your own
+Search for movies by title, actor, or genre
 
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example) or preview live with [StackBlitz](https://stackblitz.com/github/vercel/next.js/tree/canary/examples/with-tailwindcss)
+View movie details, including the trailer, cast, and reviews
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-tailwindcss&project-name=with-tailwindcss&repository-name=with-tailwindcss)
+Add movies to a watchlist and mark them as watched
 
-## How to use
+Authentication using Firebase Authentication
 
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init), [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/), or [pnpm](https://pnpm.io) to bootstrap the example:
+Firestore integration to store movie data and user watchlists
 
-```bash
-npx create-next-app --example with-tailwindcss with-tailwindcss-app
-```
+## Installation
 
-```bash
-yarn create next-app --example with-tailwindcss with-tailwindcss-app
-```
+Clone the repository: git clone https://github.com/your-username/movie-app.git
 
-```bash
-pnpm create next-app --example with-tailwindcss with-tailwindcss-app
-```
+Install dependencies: npm install
 
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+Set up Firebase:
+
+Create a new project on Firebase
+
+Enable Firebase Authentication, Firestore, and Storage
+
+Add a web app to the project and copy the configuration object
+
+Create a .env.local file in the root directory and add the Firebase configuration object:
+
+Create a service account and download the JSON file
+
+Save the JSON file in the root directory as firebase-adminsdk.json
+
+Run the app: npm run dev
+
+# Acknowledgements
+Next.js
+
+Tailwind CSS
+
+Firebase
